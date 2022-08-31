@@ -28,8 +28,6 @@ public partial class App : Application
     {
         INavigationService navigationService = serviceProvider.GetRequiredService<INavigationService>();
 
-        // await navigationService.LaunchLoadingPage();
-
         ContentPage page = serviceProvider.GetRequiredService<MainPage>() as ContentPage;
         navigationService.LaunchPage(page);
     }
