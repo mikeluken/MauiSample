@@ -8,3 +8,7 @@ Also note that this works perfectly on Android. So it appears to be limited to i
 
 Also note: if I just set ((App)Application.Current).MainPage = page without wrapping it in a FlyoutPage, the event is fired on iOS without a problem. So something about being a FlyoutPage doesn't work with the rotation on iOS.
 
+Place a breakpoint on MauiSample.UI.MainPage..OnSizeAllocated():
+image
+
+It is hit when the page loads. But is not hit when the screen on an iPad rotates.
