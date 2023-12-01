@@ -1,4 +1,4 @@
-# MauiSample
+# MauiSample 2
 
 It appears when I create a new MAUI app, the event OnSizeAllocated(double, double) is not being fired on screen rotation, when that page is a FlyoutPage.
 
