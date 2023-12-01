@@ -1,6 +1,8 @@
 # MauiSample
 
-I have upgraded my Maui app to use .net8 and target Android 13.  In doing so, I am trying to eliminate the deprecated `base.OnBackPressed();` but I am running into an issue.
+I have started upgrading our Maui apps to use .net8 and target Android 13.  In doing so, I am trying to eliminate the deprecated `base.OnBackPressed();` but I am running into an issue.
+
+# Background
 
 Old logic:
 ```
@@ -15,27 +17,6 @@ public override void OnBackPressed()
     {
         base.OnBackPressed();
     }
-}
-```
-
-I am launching my page like this:
-
-```
-// App.xaml.cs
-public App()
-{
-    InitializeComponent();
-    Start();
-}
-
-private async void Start()
-{
-    var page = serviceProvider.GetRequiredService<MyFirstPage>();
-    Application.Current?.Dispatcher.Dispatch(async () =>
-    {
-        ((App)Application.Current).MainPage = page;
-        await Task.Delay(1);
-    };
 }
 ```
 
@@ -70,7 +51,14 @@ public class BackPressedCallback : OnBackPressedCallback
         else
         {
             var mainPage = ((App)Microsoft.Maui.Controls.Application.Current)?.MainPage;
-            mainPage.SendBackButtonPressed();
+            if (mainPage != null)
+            {
+                bool backHandled = mainPage.SendBackButtonPressed();
+                if (!backHandled)
+                {
+                    activity.FinishAndRemoveTask();
+                }
+            }
         }
     }
 }
