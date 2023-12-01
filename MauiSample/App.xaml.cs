@@ -8,12 +8,14 @@ public partial class App : Application
     public ServiceProvider ServiceProvider { get; set; }
 
     public App()
-	{
+    {
         InitializeComponent();
 
         IServiceCollection services = new ServiceCollection();
         ConfigureServices(services);
         ServiceProvider = services.BuildServiceProvider();
+
+        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
         Start();
     }
@@ -32,5 +34,15 @@ public partial class App : Application
 
         ContentPage page = ServiceProvider.GetRequiredService<Page1>() as ContentPage;
         navigationService.LaunchPage(page);
+    }
+
+    protected override void OnResume()
+    {
+        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+    }
+
+    private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+        // handle connectivity changed event here....
     }
 }
