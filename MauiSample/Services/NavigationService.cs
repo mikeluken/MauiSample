@@ -1,4 +1,4 @@
-﻿using MauiSample.UI.Menus;
+﻿using MauiSample.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +9,35 @@ namespace MauiSample.Services
 {
     public class NavigationService : INavigationService
     {
-        public void LaunchPage(ContentPage page)
+        public async Task LaunchPage(Page page) 
+        {
+            var mainPage = ((App)Application.Current).MainPage;
+            if (mainPage != null && mainPage.GetType() == typeof(FlyoutPage))
+            {
+                Page mdp = (mainPage as FlyoutPage).Detail;
+                NavigationPage np = (NavigationPage)mdp;
+
+                await np.PushAsync(page);
+            }
+            else
+            {
+                FlyoutPage FlyoutPage = new FlyoutPage
+                {
+                    Detail = new NavigationPage(page),
+                    Flyout = new DrawerMenu(),
+                    FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover,
+                };
+                ((App)Application.Current).MainPage = FlyoutPage;
+            }
+        }
+
+        public void LaunchPageRoot(Page page)
         {
             FlyoutPage FlyoutPage = new FlyoutPage
             {
-                Detail = new NavigationPage(page)
-                {
-                    BarBackgroundColor = Color.FromArgb("#000000")
-                },
+                Detail = new NavigationPage(page),
                 Flyout = new DrawerMenu(),
-                FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover
+                FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover,
             };
             ((App)Application.Current).MainPage = FlyoutPage;
         }

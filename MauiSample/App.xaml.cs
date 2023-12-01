@@ -5,7 +5,7 @@ namespace MauiSample;
 
 public partial class App : Application
 {
-    public ServiceProvider serviceProvider { get; set; }
+    public ServiceProvider ServiceProvider { get; set; }
 
     public App()
 	{
@@ -13,7 +13,7 @@ public partial class App : Application
 
         IServiceCollection services = new ServiceCollection();
         ConfigureServices(services);
-        serviceProvider = services.BuildServiceProvider();
+        ServiceProvider = services.BuildServiceProvider();
 
         Start();
     }
@@ -21,14 +21,16 @@ public partial class App : Application
     private void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddTransient<MainPage>();
+        services.AddTransient<Page1>();
+        services.AddTransient<Page2>();
+        services.AddTransient<Page3>();
     }
 
     private void Start()
     {
-        INavigationService navigationService = serviceProvider.GetRequiredService<INavigationService>();
+        INavigationService navigationService = ServiceProvider.GetRequiredService<INavigationService>();
 
-        ContentPage page = serviceProvider.GetRequiredService<MainPage>() as ContentPage;
+        ContentPage page = ServiceProvider.GetRequiredService<Page1>() as ContentPage;
         navigationService.LaunchPage(page);
     }
 }

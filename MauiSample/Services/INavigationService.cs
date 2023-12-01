@@ -8,6 +8,7 @@ namespace MauiSample.Services
 {
     public interface INavigationService
     {
-        void LaunchPage(ContentPage page);
+        Task LaunchPage(Page page);
+        void LaunchPageRoot(Page page);
     }
 }
