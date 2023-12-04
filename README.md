@@ -87,20 +87,3 @@ This is a pretty straight forward app that recreates the issue I am having.
 
 5 - Try to use the physical nack button again.  The back navigation no longer works.
 
-# MASSIVE UPDATE
-
-I did find that if I target Android SDK version 34, everything works as expected and this issue no longer presents itself.
-
-However, I am not currently able to target SDK version 34, because there is a bug where the app crashes immediately if there is a ConnectivityChanged event registered, which I need in my app:
-
-```
-// App.xaml.cs
-Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-```
-
-![image](https://github.com/mikeluken/MauiSample/assets/63020895/1a241189-2979-4176-8100-f4212ed77993)
-
-Here is information on that bug in github:
-https://github.com/dotnet/maui/issues/17861
-
-I am not sure if the solution is to wait until the fix for this bug is released and then just target SDK 34?  Or if there is some other way to get around my issue?
