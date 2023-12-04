@@ -85,5 +85,5 @@ This is a pretty straight forward app that recreates the issue I am having.
 
 4 - Navigate to page 3.  
 
-5 - Try to use the physical nack button again.  The back navigation no longer works.
+5 - Try to use the physical back button again.  The back navigation no longer works.
 
