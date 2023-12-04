@@ -36,11 +36,6 @@ public partial class App : Application
         navigationService.LaunchPage(page);
     }
 
-    protected override void OnResume()
-    {
-        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-    }
-
     private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
     {
         // handle connectivity changed event here....

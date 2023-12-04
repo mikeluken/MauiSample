@@ -1,5 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
+using AndroidX.Activity;
+using Microsoft.Maui.Platform;
 
 namespace MauiSample.Platforms.Android;
 

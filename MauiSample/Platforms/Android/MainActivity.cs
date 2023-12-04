@@ -15,7 +15,7 @@ public class MainActivity : MauiAppCompatActivity
         MainApplication.activity = this;
 
         OnBackPressedDispatcher.AddCallback(
-            MainApplication.activity, 
+            this, 
             new BackPressedCallback(this)
         );
     }
