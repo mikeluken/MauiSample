@@ -15,7 +15,7 @@ public partial class App : Application
         ConfigureServices(services);
         ServiceProvider = services.BuildServiceProvider();
 
-        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        // Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
         Start();
     }
